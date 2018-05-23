@@ -1,14 +1,17 @@
 import React from "react";
 import Reviews from "./Reviews";
+import PropTypes from "prop-types";
+
 
 function ProductDetail(props) {
   const {name,description,rating,imgUrl,reviews} = props.product;
   
- 
-  
   const stars = [];
   for (let i = 0; i < rating; i++) {
     stars.push(<span className="glyphicon glyphicon-star" />);
+  }
+  for (let i = 0; i < 5 - rating; i++) {
+    stars.push(<span className="glyphicon glyphicon-star-empty" />);
   }
 
   return (
@@ -22,7 +25,7 @@ function ProductDetail(props) {
           </p>
         </div>
         <div className="ratings">
-          <p className="pull-right">15 reviews</p>
+          <p className="pull-right">{reviews.length} reviews</p>
           <p>
             {stars}
           </p>
@@ -34,4 +37,9 @@ function ProductDetail(props) {
     </div>
   );
 }
+
+ProductDetail.propTypes = {
+  product: PropTypes.object
+};
+
 export default ProductDetail;
